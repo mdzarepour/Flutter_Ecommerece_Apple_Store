@@ -1,4 +1,5 @@
 import 'package:apple_store/core/theme/app_theme.dart';
+import 'package:apple_store/screens/home_screen.dart';
 import 'package:apple_store/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class Application extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: SplashScreen(),
+      home: HomeScreen(),
     );
   }
 }

@@ -29,6 +29,31 @@ class SplashScreen extends StatelessWidget {
     );
   }
 
+  Stack _buildSplashScreenUpperSection(Size size, textTheme) {
+    return Stack(
+      children: [
+        SvgPicture.asset('assets/images/splash.svg'),
+        Positioned(
+          bottom: 0,
+          top: 0,
+          left: 0,
+          right: 0,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/images/Vector.png'),
+              SizedBox(height: size.height * 0.015),
+              Text(
+                style: textTheme.headlineLarge,
+                ConstStrings.splashScreenTitle,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   Stack __buildSplashScreenBottomSection(size, scheme, textTheme) {
     return Stack(
       children: [
@@ -50,31 +75,6 @@ class SplashScreen extends StatelessWidget {
                 backgroundColor: scheme.secondary,
                 radius: 35,
                 child: SvgPicture.asset('assets/icons/arrow_icon.svg'),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Stack _buildSplashScreenUpperSection(Size size, textTheme) {
-    return Stack(
-      children: [
-        SvgPicture.asset('assets/images/splash.svg'),
-        Positioned(
-          bottom: 0,
-          top: 0,
-          left: 0,
-          right: 0,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/Vector.png'),
-              SizedBox(height: size.height * 0.015),
-              Text(
-                style: textTheme.headlineLarge,
-                ConstStrings.splashScreenTitle,
               ),
             ],
           ),
