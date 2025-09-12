@@ -17,12 +17,29 @@ class AppTextTheme {
       fontWeight: FontWeight.w700,
       color: ConstColors.materialWhite,
     ),
-    // titleLarge:
-    // titleMedium:
-    // titleSmall:
-    // bodyLarge:
-    // bodyMedium:
-    // bodySmall:
-    // displayMedium:
+    headlineSmall: TextStyle(
+      fontFamily: 'SB',
+      fontSize: 16,
+      fontWeight: FontWeight.w700,
+      color: ConstColors.materialGrey,
+    ),
+    bodySmall: TextStyle(
+      fontFamily: 'SB',
+      fontSize: 12,
+      fontWeight: FontWeight.w700,
+      color: ConstColors.materialBlack,
+    ),
+    bodyMedium: TextStyle(
+      fontFamily: 'SB',
+      fontSize: 12,
+      fontWeight: FontWeight.w700,
+      color: ConstColors.materialGrey,
+    ),
+    bodyLarge: TextStyle(
+      fontFamily: 'SB',
+      fontSize: 12,
+      fontWeight: FontWeight.w700,
+      color: ConstColors.materialBlue,
+    ),
   );
 }

@@ -4,7 +4,7 @@ class ConstColors {
   static const Color materialWhite = Color(0xFFFFFFFF);
   static const Color materialCreamWhite = Color(0xFFEEEEEE);
   static const Color materialBlack = Color(0xFF000000);
-  static const Color materialBlue = Color(0xFF253DEE);
+  static const Color materialBlue = Color(0xFF3B5EDF);
   static const Color materialSoftBlue = Color(0xFF58AEE8);
   static const Color materialGrey = Color(0xFF858585);
   static const Color materialDarkGrey = Color(0xFF393939);
@@ -12,6 +12,7 @@ class ConstColors {
   static const Color materialRed = Color(0xFFD02026);
   static const Color materialPurple = Color(0xFF6866F9);
   static const Color materialOrange = Color(0xFFFBAD40);
+  static const Color materialPink = Color(0xFFE858DA);
 }
 
 class ConstGradients {

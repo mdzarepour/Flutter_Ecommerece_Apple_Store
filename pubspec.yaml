@@ -37,6 +37,9 @@ dependencies:
   flutter_svg: ^2.2.0
   iconsax: ^0.0.8
   smooth_page_indicator: ^1.2.1
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 dev_dependencies:
   flutter_test:
