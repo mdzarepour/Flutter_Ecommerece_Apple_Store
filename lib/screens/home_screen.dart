@@ -1,8 +1,10 @@
 import 'package:apple_store/core/utils/category_model.dart';
 import 'package:apple_store/core/utils/const_strings.dart';
+import 'package:apple_store/screens/widgets/appbar_widget.dart';
 import 'package:apple_store/screens/widgets/banner_item_widget.dart';
 import 'package:apple_store/screens/widgets/category_item_widget.dart';
 import 'package:apple_store/screens/widgets/helper_link_widget.dart';
+import 'package:apple_store/screens/widgets/product_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -27,16 +29,20 @@ class HomeScreen extends StatelessWidget {
         body: SafeArea(
           child: CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(child: SizedBox(height: size.height * 0.025)),
-              _buildHomeScreenSearchWidget(size, scheme, textTheme),
+              SliverToBoxAdapter(child: SizedBox(height: size.height * 0.023)),
+              _buildHomeScreenSearchWidget(textTheme),
               SliverToBoxAdapter(child: SizedBox(height: size.height * 0.035)),
               _buildHomeScreenBannerWidget(size, bannerController, scheme),
               SliverToBoxAdapter(child: SizedBox(height: size.height * 0.035)),
               _buildHomeScreenCategoryListWidget(textTheme, size),
               SliverToBoxAdapter(child: SizedBox(height: size.height * 0.035)),
               HelperLinkWidget(title: ConstStrings.homeScreenBestSellers),
-
-              SliverFillRemaining(),
+              SliverToBoxAdapter(child: SizedBox(height: size.height * 0.023)),
+              _buildHomeScreenProductListWidget(size),
+              SliverToBoxAdapter(child: SizedBox(height: size.height * 0.035)),
+              HelperLinkWidget(title: ConstStrings.homeScreenMostVieweds),
+              SliverToBoxAdapter(child: SizedBox(height: size.height * 0.023)),
+              _buildHomeScreenProductListWidget(size),
             ],
           ),
         ),
@@ -44,44 +50,35 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  SliverAppBar _buildHomeScreenSearchWidget(
-    Size size,
-    ColorScheme scheme,
-    TextTheme textTheme,
-  ) {
-    return SliverAppBar(
-      pinned: true,
-      backgroundColor: scheme.surface,
-      surfaceTintColor: Colors.transparent,
-      toolbarHeight: size.height * 0.05,
-      flexibleSpace: FlexibleSpaceBar(
-        background: Container(
-          margin: EdgeInsets.symmetric(horizontal: 40.0),
-          padding: EdgeInsets.symmetric(horizontal: 15.0),
-          decoration: BoxDecoration(
-            color: scheme.onSecondary,
-            borderRadius: BorderRadius.circular(15.0),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset('assets/icons/search.svg'),
-              Expanded(
-                child: TextField(
-                  style: textTheme.headlineSmall,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(top: 2, right: 5),
-                    hintText: ConstStrings.homeScreenSearchHint,
-                    hintStyle: textTheme.headlineSmall,
-                    border: OutlineInputBorder(borderSide: BorderSide.none),
-                  ),
-                ),
-              ),
-              SvgPicture.asset('assets/icons/apple.svg'),
-            ],
-          ),
+  SliverToBoxAdapter _buildHomeScreenProductListWidget(Size size) {
+    return SliverToBoxAdapter(
+      child: SizedBox(
+        height: size.height * 0.255,
+        child: ListView.builder(
+          itemCount: 10,
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.only(right: 44),
+          itemBuilder: (context, index) {
+            return ProductItemWidget();
+          },
         ),
       ),
+    );
+  }
+
+  Widget _buildHomeScreenSearchWidget(textTheme) {
+    return AppbarWidget(
+      startWidget: SvgPicture.asset('assets/icons/search.svg'),
+      centerWidget: TextField(
+        style: textTheme.headlineSmall,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.only(top: 2, right: 5),
+          hintText: ConstStrings.homeScreenSearchHint,
+          hintStyle: textTheme.headlineSmall,
+          border: OutlineInputBorder(borderSide: BorderSide.none),
+        ),
+      ),
+      endWidget: SvgPicture.asset('assets/icons/apple.svg'),
     );
   }
 
@@ -142,9 +139,9 @@ class HomeScreen extends StatelessWidget {
               ConstStrings.homeScreenCategoryTitle,
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: size.height * 0.023),
           SizedBox(
-            height: size.height * 0.1,
+            height: size.height * 0.09,
             width: double.infinity,
             child: ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 40),

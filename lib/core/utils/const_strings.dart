@@ -7,4 +7,5 @@ class ConstStrings {
   static const String homeScreenleperLink = 'مشاهده همه';
   static const String homeScreenCategoryTitle = 'دسته بندی';
   static const String homeScreenBestSellers = 'پر فروش ترین ها';
+  static const String homeScreenMostVieweds = 'پر بازدید ترین ها';
 }

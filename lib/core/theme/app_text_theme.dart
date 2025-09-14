@@ -41,5 +41,29 @@ class AppTextTheme {
       fontWeight: FontWeight.w700,
       color: ConstColors.materialBlue,
     ),
+    displayLarge: TextStyle(
+      fontFamily: 'SM',
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      color: ConstColors.materialWhite,
+    ),
+    displayMedium: TextStyle(
+      fontFamily: 'SM',
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      color: ConstColors.materialWhite,
+    ),
+    displaySmall: TextStyle(
+      fontFamily: 'SM',
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      color: ConstColors.materialBlack,
+    ),
+    labelLarge: TextStyle(
+      fontFamily: 'SB',
+      fontSize: 10,
+      fontWeight: FontWeight.w700,
+      color: ConstColors.materialWhite,
+    ),
   );
 }
