@@ -1,7 +1,8 @@
 import 'package:apple_store/core/utils/const_colors.dart';
 import 'package:apple_store/core/utils/const_strings.dart';
+import 'package:apple_store/screens/home_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -10,76 +11,114 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scheme = Theme.of(context).colorScheme;
-    final textThme = Theme.of(context).textTheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: ConstGradients.splashScreenGradient,
         ),
-        child: Column(
-          children: [
-            SizedBox(height: size.height * 0.085),
-            _buildSplashScreenUpperSection(size, textThme),
-            __buildSplashScreenBottomSection(size, scheme, textThme),
-          ],
+        child: SafeArea(
+          child: Column(
+            children: [
+              _buildSplashScreenUpperSection(size, textTheme, scheme),
+              _buildSplashScreenBottomSection(size, scheme, textTheme, context),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Stack _buildSplashScreenUpperSection(Size size, textTheme) {
-    return Stack(
-      children: [
-        SvgPicture.asset('assets/images/splash.svg'),
-        Positioned(
-          bottom: 0,
-          top: 0,
-          left: 0,
-          right: 0,
-          child: Column(
+  Widget _buildSplashScreenUpperSection(size, textTheme, scheme) {
+    return Expanded(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          CustomPaint(
+            painter: _ConcentricCirclesPainter(color: scheme.onSecondary),
+          ),
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/Vector.png'),
-              SizedBox(height: size.height * 0.015),
+              const Icon(Icons.apple, size: 125),
               Text(
-                style: textTheme.headlineLarge,
                 ConstStrings.splashScreenTitle,
+                style: textTheme.headlineLarge,
               ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Stack __buildSplashScreenBottomSection(size, scheme, textTheme) {
-    return Stack(
-      children: [
-        Image.asset(scale: 1.2, 'assets/images/pattern.png'),
-        Padding(
-          padding: EdgeInsetsGeometry.symmetric(horizontal: 40),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              SizedBox(width: double.infinity),
-              SizedBox(height: size.height * 0.115),
-              Text(
-                style: textTheme.headlineMedium,
-                textDirection: TextDirection.rtl,
-                ConstStrings.splashScreenMessage,
-              ),
-              SizedBox(height: size.height * 0.030),
-              CircleAvatar(
-                backgroundColor: scheme.secondary,
-                radius: 35,
-                child: SvgPicture.asset('assets/icons/arrow_icon.svg'),
-              ),
-            ],
+  Widget _buildSplashScreenBottomSection(size, scheme, textTheme, context) {
+    return Expanded(
+      child: Stack(
+        children: [
+          Image.asset(
+            'assets/images/pattern.png',
+            width: double.infinity,
+            fit: BoxFit.cover,
           ),
-        ),
-      ],
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 100),
+                Text(
+                  ConstStrings.splashScreenMessage,
+                  style: textTheme.headlineMedium,
+                  textDirection: TextDirection.rtl,
+                ),
+                const SizedBox(height: 35),
+                InkWell(
+                  onTap: () {
+                    final route = CupertinoPageRoute(
+                      builder: (context) => const HomeScreen(),
+                    );
+                    Navigator.pushReplacement(context, route);
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: scheme.secondary,
+                    radius: size.height * 0.04,
+                    child: CircleAvatar(
+                      backgroundColor: scheme.onSecondary,
+                      child: Icon(Icons.arrow_back, color: scheme.secondary),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
+  }
+}
+
+class _ConcentricCirclesPainter extends CustomPainter {
+  final Color color;
+
+  const _ConcentricCirclesPainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final paint = Paint()..style = PaintingStyle.fill;
+
+    for (int i = 3; i <= 5; i++) {
+      paint.color = color.withAlpha(i * 10);
+      canvas.drawCircle(center, i * 30.0, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _ConcentricCirclesPainter oldDelegate) {
+    return oldDelegate.color != color;
   }
 }

@@ -24,12 +24,9 @@ class ConstGradients {
       Color.fromARGB(255, 59, 95, 223),
     ],
   );
-  static const LinearGradient bottomNavigationGradient = LinearGradient(
+  static LinearGradient bottomNavigationGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [
-      Color.fromRGBO(255, 255, 255, 40),
-      Color.fromRGBO(255, 255, 255, 10),
-    ],
+    colors: [Colors.white.withAlpha(40), Colors.white.withAlpha(10)],
   );
 }

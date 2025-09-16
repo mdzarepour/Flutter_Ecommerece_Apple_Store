@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppbarWidget extends StatelessWidget {
-  final Widget startWidget;
-  final Widget centerWidget;
-  final Widget endWidget;
+  final Widget? startWidget;
+  final Widget? centerWidget;
+  final Widget? endWidget;
 
   const AppbarWidget({
     super.key,
@@ -20,22 +20,21 @@ class AppbarWidget extends StatelessWidget {
       pinned: true,
       backgroundColor: scheme.surface,
       surfaceTintColor: Colors.transparent,
-      toolbarHeight: size.height * 0.05,
+      toolbarHeight: size.height * 0.070,
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
-          margin: EdgeInsets.symmetric(horizontal: 40.0),
-          padding: EdgeInsets.symmetric(horizontal: 15.0),
+          margin: EdgeInsets.symmetric(
+            horizontal: size.width * 0.1,
+            vertical: 8,
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
           decoration: BoxDecoration(
             color: scheme.onSecondary,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              startWidget,
-              Expanded(child: centerWidget),
-              endWidget,
-            ],
+            children: [?startWidget, ?centerWidget, ?endWidget],
           ),
         ),
       ),

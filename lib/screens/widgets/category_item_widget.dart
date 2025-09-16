@@ -25,7 +25,7 @@ class CategoryItemWidget extends StatelessWidget {
                   color: category.color.withAlpha(25),
                   spreadRadius: 0.5,
                   blurRadius: 5.0,
-                  offset: Offset(0.0, 10.0),
+                  offset: const Offset(0.0, 10.0),
                 ),
               ],
               shape: ContinuousRectangleBorder(
@@ -38,7 +38,7 @@ class CategoryItemWidget extends StatelessWidget {
               size: size.height * 0.03,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Text(style: textTheme.bodySmall, category.title),
         ],
       ),

@@ -10,15 +10,16 @@ class HelperLinkWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final scheme = Theme.of(context).colorScheme;
+    final size = MediaQuery.of(context).size;
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
+        padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
         child: Row(
           children: [
             Text(title, style: textTheme.bodyMedium),
-            Spacer(),
+            const Spacer(),
             Text(style: textTheme.bodyLarge, ConstStrings.homeScreenleperLink),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Icon(Iconsax.arrow_circle_left, color: scheme.secondary),
           ],
         ),

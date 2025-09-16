@@ -7,19 +7,18 @@ class ProductItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-
+    final size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.only(left: 20),
+      padding: const EdgeInsets.only(left: 20),
       child: SizedBox(
-        height: double.infinity,
-        width: 160,
+        width: size.width * 0.38,
         child: ClipRRect(
           borderRadius: BorderRadiusGeometry.circular(15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _productItemUpperSection(scheme, textTheme),
-              _productItemBottomSection(scheme, textTheme),
+              _productItemUpperSection(scheme, textTheme, size),
+              _productItemBottomSection(scheme, textTheme, size),
             ],
           ),
         ),
@@ -27,7 +26,7 @@ class ProductItemWidget extends StatelessWidget {
     );
   }
 
-  Expanded _productItemUpperSection(ColorScheme scheme, TextTheme textTheme) {
+  Expanded _productItemUpperSection(scheme, textTheme, size) {
     return Expanded(
       flex: 6,
       child: ColoredBox(
@@ -35,62 +34,67 @@ class ProductItemWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 10),
-            SizedBox(width: double.infinity),
-            Stack(
-              children: [
-                Positioned(
-                  top: 0,
-                  right: 10,
-                  child: CircleAvatar(
-                    radius: 12,
-                    backgroundColor: scheme.secondary,
-                    child: Icon(
-                      Icons.favorite,
-                      size: 13,
-                      color: scheme.onSecondary,
-                      fontWeight: FontWeight.bold,
+            const SizedBox(height: 10),
+            Expanded(
+              flex: 6,
+              child: Stack(
+                children: [
+                  Center(child: Image.asset('assets/images/product.jpg')),
+                  Positioned(
+                    top: 0,
+                    right: 10,
+                    child: CircleAvatar(
+                      radius: 12,
+                      backgroundColor: scheme.secondary,
+                      child: Icon(
+                        Icons.favorite,
+                        size: 13,
+                        color: scheme.onSecondary,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                Center(child: Image.asset('assets/images/product.png')),
-                Positioned(
-                  left: 10,
-                  bottom: 0,
-                  child: Container(
-                    width: 25,
-                    height: 15,
-                    decoration: BoxDecoration(
-                      color: scheme.errorContainer,
-                      borderRadius: BorderRadius.circular(7.5),
-                    ),
-                    child: Center(
-                      child: Text(style: textTheme.labelLarge, '%۳'),
+                  Positioned(
+                    left: 10,
+                    bottom: 0,
+                    child: Container(
+                      width: size.width * 0.06,
+                      height: size.height * 0.017,
+                      decoration: BoxDecoration(
+                        color: scheme.errorContainer,
+                        borderRadius: BorderRadius.circular(7.5),
+                      ),
+                      child: Center(
+                        child: Text(style: textTheme.labelLarge, '%۳'),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            SizedBox(height: 20),
-            Text(
-              textAlign: TextAlign.center,
-              style: textTheme.displaySmall,
-              'آیفون ۱۳ پرومکس',
+            const Spacer(),
+            Expanded(
+              flex: 1,
+              child: Text(
+                textAlign: TextAlign.center,
+                style: textTheme.displaySmall,
+                'آیفون ۱۳ پرومکس',
+              ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ),
     );
   }
 
-  Expanded _productItemBottomSection(scheme, textTheme) {
+  Expanded _productItemBottomSection(scheme, textTheme, size) {
     return Expanded(
       flex: 2,
       child: ColoredBox(
         color: scheme.secondary,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.025),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -132,7 +136,7 @@ class ProductItemWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 5),
+              const SizedBox(width: 8),
               Expanded(
                 flex: 2,
                 child: Text(style: textTheme.displayLarge, 'تومان'),

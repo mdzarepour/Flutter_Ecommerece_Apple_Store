@@ -7,7 +7,7 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     textTheme: AppTextTheme.lightTextTheme,
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       surface: ConstColors.materialCreamWhite,
       onSurface: ConstColors.materialBlack,
       primary: ConstColors.materialDarkGrey,
@@ -17,6 +17,18 @@ class AppTheme {
       errorContainer: ConstColors.materialRed,
       primaryContainer: ConstColors.materialOrange,
       secondaryContainer: ConstColors.materialPurple,
+    ),
+    inputDecorationTheme: const InputDecorationThemeData(
+      contentPadding: EdgeInsets.only(top: 2),
+      border: OutlineInputBorder(borderSide: BorderSide.none),
+    ),
+    iconTheme: const IconThemeData(color: ConstColors.materialWhite),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      selectedIconTheme: IconThemeData(size: 25),
+      selectedItemColor: ConstColors.materialBlue,
+      unselectedItemColor: ConstColors.materialBlack,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
     ),
   );
 }

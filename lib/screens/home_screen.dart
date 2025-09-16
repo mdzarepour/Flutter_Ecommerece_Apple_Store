@@ -6,18 +6,17 @@ import 'package:apple_store/screens/widgets/category_item_widget.dart';
 import 'package:apple_store/screens/widgets/helper_link_widget.dart';
 import 'package:apple_store/screens/widgets/product_item_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  final int selectedCategoryIndex = 0;
   @override
   Widget build(BuildContext context) {
     //TODO move controller to state manager
     final PageController bannerController = PageController(
-      viewportFraction: 0.86,
+      viewportFraction: 0.85,
     );
     final size = MediaQuery.of(context).size;
     final scheme = Theme.of(context).colorScheme;
@@ -25,68 +24,53 @@ class HomeScreen extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
-      child: Scaffold(
-        body: SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(child: SizedBox(height: size.height * 0.023)),
-              _buildHomeScreenSearchWidget(textTheme),
-              SliverToBoxAdapter(child: SizedBox(height: size.height * 0.035)),
-              _buildHomeScreenBannerWidget(size, bannerController, scheme),
-              SliverToBoxAdapter(child: SizedBox(height: size.height * 0.035)),
-              _buildHomeScreenCategoryListWidget(textTheme, size),
-              SliverToBoxAdapter(child: SizedBox(height: size.height * 0.035)),
-              HelperLinkWidget(title: ConstStrings.homeScreenBestSellers),
-              SliverToBoxAdapter(child: SizedBox(height: size.height * 0.023)),
-              _buildHomeScreenProductListWidget(size),
-              SliverToBoxAdapter(child: SizedBox(height: size.height * 0.035)),
-              HelperLinkWidget(title: ConstStrings.homeScreenMostVieweds),
-              SliverToBoxAdapter(child: SizedBox(height: size.height * 0.023)),
-              _buildHomeScreenProductListWidget(size),
-            ],
+      child: CustomScrollView(
+        slivers: [
+          _buildHomeScreenSearchWidget(textTheme, scheme, size),
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          _buildHomeScreenBannerWidget(size, bannerController, scheme),
+          const SliverToBoxAdapter(child: SizedBox(height: 30)),
+          _buildHomeScreenCategoryListWidget(textTheme, size),
+          const SliverToBoxAdapter(child: SizedBox(height: 30)),
+          const HelperLinkWidget(title: ConstStrings.homeScreenBestSellers),
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          _buildHomeScreenProductListWidget(size),
+          const SliverToBoxAdapter(child: SizedBox(height: 30)),
+          const HelperLinkWidget(title: ConstStrings.homeScreenMostVieweds),
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          _buildHomeScreenProductListWidget(size),
+          const SliverToBoxAdapter(child: SizedBox(height: 30)),
+          const HelperLinkWidget(title: ConstStrings.homeScreenMostVieweds),
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          _buildHomeScreenProductListWidget(size),
+          const SliverToBoxAdapter(child: SizedBox(height: 30)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHomeScreenSearchWidget(textTheme, scheme, size) {
+    return AppbarWidget(
+      startWidget: Icon(
+        Iconsax.search_normal_1,
+        size: size.height * 0.028,
+        color: scheme.onSurface,
+      ),
+      centerWidget: Expanded(
+        child: TextField(
+          textAlign: TextAlign.center,
+          style: textTheme.headlineSmall,
+          decoration: InputDecoration(
+            hintText: ConstStrings.homeScreenSearchHint,
+            hintStyle: textTheme.headlineSmall,
           ),
         ),
       ),
+      endWidget: Icon(Icons.apple, color: scheme.secondary, size: 32),
     );
   }
 
-  SliverToBoxAdapter _buildHomeScreenProductListWidget(Size size) {
-    return SliverToBoxAdapter(
-      child: SizedBox(
-        height: size.height * 0.255,
-        child: ListView.builder(
-          itemCount: 10,
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.only(right: 44),
-          itemBuilder: (context, index) {
-            return ProductItemWidget();
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHomeScreenSearchWidget(textTheme) {
-    return AppbarWidget(
-      startWidget: SvgPicture.asset('assets/icons/search.svg'),
-      centerWidget: TextField(
-        style: textTheme.headlineSmall,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(top: 2, right: 5),
-          hintText: ConstStrings.homeScreenSearchHint,
-          hintStyle: textTheme.headlineSmall,
-          border: OutlineInputBorder(borderSide: BorderSide.none),
-        ),
-      ),
-      endWidget: SvgPicture.asset('assets/icons/apple.svg'),
-    );
-  }
-
-  Widget _buildHomeScreenBannerWidget(
-    Size size,
-    PageController bannerController,
-    ColorScheme scheme,
-  ) {
+  Widget _buildHomeScreenBannerWidget(size, bannerController, scheme) {
     return SliverToBoxAdapter(
       child: SizedBox(
         height: size.height * 0.195,
@@ -101,7 +85,7 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             Align(
-              alignment: Alignment(0, 0.9),
+              alignment: const Alignment(0, 0.9),
               child: SmoothPageIndicator(
                 controller: bannerController,
                 count: 3,
@@ -127,26 +111,26 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHomeScreenCategoryListWidget(textTheme, Size size) {
+  Widget _buildHomeScreenCategoryListWidget(textTheme, size) {
     return SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 40),
+            padding: EdgeInsets.only(right: size.width * 0.1),
             child: Text(
               style: textTheme.bodyMedium,
               ConstStrings.homeScreenCategoryTitle,
             ),
           ),
-          SizedBox(height: size.height * 0.023),
+          const SizedBox(height: 20),
           SizedBox(
             height: size.height * 0.09,
             width: double.infinity,
             child: ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 40),
               itemCount: CategoryModel.categories.length,
               scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.only(right: size.width * 0.1),
               itemBuilder: (context, index) {
                 final CategoryModel category = CategoryModel.categories[index];
                 return CategoryItemWidget(category: category);
@@ -154,6 +138,22 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  SliverToBoxAdapter _buildHomeScreenProductListWidget(size) {
+    return SliverToBoxAdapter(
+      child: SizedBox(
+        height: size.height * 0.248,
+        child: ListView.builder(
+          itemCount: 10,
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.only(right: size.width * 0.1),
+          itemBuilder: (context, index) {
+            return const ProductItemWidget();
+          },
+        ),
       ),
     );
   }
