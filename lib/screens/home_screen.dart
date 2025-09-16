@@ -151,7 +151,10 @@ class HomeScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.only(right: size.width * 0.1),
           itemBuilder: (context, index) {
-            return const ProductItemWidget();
+            return const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: ProductItemWidget(),
+            );
           },
         ),
       ),

@@ -8,19 +8,16 @@ class ProductItemWidget extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.only(left: 20),
-      child: SizedBox(
-        width: size.width * 0.38,
-        child: ClipRRect(
-          borderRadius: BorderRadiusGeometry.circular(15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _productItemUpperSection(scheme, textTheme, size),
-              _productItemBottomSection(scheme, textTheme, size),
-            ],
-          ),
+    return SizedBox(
+      width: size.width * 0.38,
+      child: ClipRRect(
+        borderRadius: BorderRadiusGeometry.circular(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _productItemUpperSection(scheme, textTheme, size),
+            _productItemBottomSection(scheme, textTheme, size),
+          ],
         ),
       ),
     );
