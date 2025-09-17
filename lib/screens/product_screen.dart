@@ -11,19 +11,45 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: SafeArea(
         child: Center(
           child: CustomScrollView(
             slivers: [
-              _buildProductScreenAppbarWidget(size, scheme, textTheme),
+              _buildProductScreenAppbarWidget(size, textTheme),
               const SliverToBoxAdapter(child: SizedBox(height: 20)),
               _buildProductScreenGridviewWidget(size),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildProductScreenAppbarWidget(size, textTheme) {
+    return AppbarWidget(
+      startWidget: InkWell(
+        onTap: () {
+          //TODO pop stack here -->
+        },
+        child: const Icon(
+          Iconsax.arrow_circle_right,
+          color: ConstColors.materialBlack,
+          size: 28,
+        ),
+      ),
+      centerWidget: Expanded(
+        child: Text(
+          textAlign: TextAlign.center,
+          ConstStrings.homeScreenMostVieweds,
+          style: textTheme.headlineSmall,
+        ),
+      ),
+      endWidget: const Icon(
+        Iconsax.filter,
+        color: ConstColors.materialBlack,
+        size: 28,
       ),
     );
   }
@@ -43,24 +69,6 @@ class ProductScreen extends StatelessWidget {
           return const ProductItemWidget();
         },
       ),
-    );
-  }
-
-  Widget _buildProductScreenAppbarWidget(size, scheme, textTheme) {
-    return AppbarWidget(
-      startWidget: Icon(
-        Iconsax.arrow_circle_right,
-        color: scheme.onSurface,
-        size: 28,
-      ),
-      centerWidget: Expanded(
-        child: Text(
-          textAlign: TextAlign.center,
-          ConstStrings.homeScreenMostVieweds,
-          style: textTheme.headlineSmall,
-        ),
-      ),
-      endWidget: Icon(Iconsax.filter, color: scheme.onSurface, size: 28),
     );
   }
 }

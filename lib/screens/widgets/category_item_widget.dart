@@ -1,4 +1,5 @@
 import 'package:apple_store/core/utils/category_model.dart';
+import 'package:apple_store/core/utils/const_colors.dart';
 import 'package:flutter/material.dart';
 
 class CategoryItemWidget extends StatelessWidget {
@@ -8,16 +9,14 @@ class CategoryItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final scheme = Theme.of(context).colorScheme;
-    final size = MediaQuery.of(context).size;
 
     return Padding(
       padding: const EdgeInsets.only(left: 20),
       child: Column(
         children: [
           Container(
-            height: size.height * 0.0588,
-            width: size.width * 0.126,
+            height: 56,
+            width: 56,
             decoration: ShapeDecoration(
               color: category.color,
               shadows: [
@@ -34,8 +33,8 @@ class CategoryItemWidget extends StatelessWidget {
             ),
             child: Icon(
               category.icon,
-              color: scheme.onSecondary,
-              size: size.height * 0.03,
+              color: ConstColors.materialWhite,
+              size: 26,
             ),
           ),
           const Spacer(),

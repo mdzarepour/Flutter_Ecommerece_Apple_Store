@@ -18,6 +18,7 @@ class AppTheme {
       primaryContainer: ConstColors.materialOrange,
       secondaryContainer: ConstColors.materialPurple,
     ),
+
     inputDecorationTheme: const InputDecorationThemeData(
       contentPadding: EdgeInsets.only(top: 2),
       border: OutlineInputBorder(borderSide: BorderSide.none),

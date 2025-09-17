@@ -1,3 +1,4 @@
+import 'package:apple_store/core/utils/const_colors.dart';
 import 'package:flutter/material.dart';
 
 class ProductItemWidget extends StatelessWidget {
@@ -5,29 +6,28 @@ class ProductItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
     return SizedBox(
-      width: size.width * 0.38,
+      width: 160,
       child: ClipRRect(
         borderRadius: BorderRadiusGeometry.circular(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _productItemUpperSection(scheme, textTheme, size),
-            _productItemBottomSection(scheme, textTheme, size),
+            _productItemUpperSection(textTheme),
+            _productItemBottomSection(textTheme, size),
           ],
         ),
       ),
     );
   }
 
-  Expanded _productItemUpperSection(scheme, textTheme, size) {
+  Expanded _productItemUpperSection(textTheme) {
     return Expanded(
       flex: 6,
       child: ColoredBox(
-        color: scheme.onSecondary,
+        color: ConstColors.materialWhite,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -36,17 +36,17 @@ class ProductItemWidget extends StatelessWidget {
               flex: 6,
               child: Stack(
                 children: [
-                  Center(child: Image.asset('assets/images/product.jpg')),
-                  Positioned(
+                  Center(child: Image.asset('assets/images/product0.png')),
+                  const Positioned(
                     top: 0,
                     right: 10,
                     child: CircleAvatar(
                       radius: 12,
-                      backgroundColor: scheme.secondary,
+                      backgroundColor: ConstColors.materialBlue,
                       child: Icon(
                         Icons.favorite,
                         size: 13,
-                        color: scheme.onSecondary,
+                        color: ConstColors.materialWhite,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -55,10 +55,10 @@ class ProductItemWidget extends StatelessWidget {
                     left: 10,
                     bottom: 0,
                     child: Container(
-                      width: size.width * 0.06,
-                      height: size.height * 0.017,
+                      width: 25,
+                      height: 15,
                       decoration: BoxDecoration(
-                        color: scheme.errorContainer,
+                        color: ConstColors.materialRed,
                         borderRadius: BorderRadius.circular(7.5),
                       ),
                       child: Center(
@@ -85,26 +85,26 @@ class ProductItemWidget extends StatelessWidget {
     );
   }
 
-  Expanded _productItemBottomSection(scheme, textTheme, size) {
+  Expanded _productItemBottomSection(textTheme, size) {
     return Expanded(
       flex: 2,
       child: ColoredBox(
-        color: scheme.secondary,
+        color: ConstColors.materialBlue,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.025),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
+              const Expanded(
                 flex: 2,
                 child: CircleAvatar(
                   radius: 12,
-                  backgroundColor: scheme.onSecondary,
+                  backgroundColor: ConstColors.materialWhite,
                   child: Icon(
                     Icons.arrow_back,
                     size: 15,
-                    color: scheme.secondary,
+                    color: ConstColors.materialBlue,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

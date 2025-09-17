@@ -1,6 +1,7 @@
 import 'package:apple_store/core/utils/const_colors.dart';
 import 'package:apple_store/core/utils/const_strings.dart';
 import 'package:apple_store/screens/home_screen.dart';
+import 'package:apple_store/screens/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,6 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
@@ -23,8 +23,8 @@ class SplashScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              _buildSplashScreenUpperSection(size, textTheme, scheme),
-              _buildSplashScreenBottomSection(size, scheme, textTheme, context),
+              _buildSplashScreenUpperSection(size, textTheme),
+              _buildSplashScreenBottomSection(size, textTheme, context),
             ],
           ),
         ),
@@ -32,13 +32,15 @@ class SplashScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSplashScreenUpperSection(size, textTheme, scheme) {
+  Widget _buildSplashScreenUpperSection(size, textTheme) {
     return Expanded(
       child: Stack(
         alignment: Alignment.center,
         children: [
-          CustomPaint(
-            painter: _ConcentricCirclesPainter(color: scheme.onSecondary),
+          const CustomPaint(
+            painter: _ConcentricCirclesPainter(
+              color: ConstColors.materialWhite,
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +57,7 @@ class SplashScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSplashScreenBottomSection(size, scheme, textTheme, context) {
+  Widget _buildSplashScreenBottomSection(size, textTheme, context) {
     return Expanded(
       child: Stack(
         children: [
@@ -79,16 +81,19 @@ class SplashScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     final route = CupertinoPageRoute(
-                      builder: (context) => const HomeScreen(),
+                      builder: (context) => const MainScreen(),
                     );
                     Navigator.pushReplacement(context, route);
                   },
-                  child: CircleAvatar(
-                    backgroundColor: scheme.secondary,
-                    radius: size.height * 0.04,
+                  child: const CircleAvatar(
+                    backgroundColor: ConstColors.materialBlue,
+                    radius: 35,
                     child: CircleAvatar(
-                      backgroundColor: scheme.onSecondary,
-                      child: Icon(Icons.arrow_back, color: scheme.secondary),
+                      backgroundColor: ConstColors.materialWhite,
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: ConstColors.materialBlue,
+                      ),
                     ),
                   ),
                 ),

@@ -1,3 +1,4 @@
+import 'package:apple_store/core/utils/const_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppbarWidget extends StatelessWidget {
@@ -14,11 +15,11 @@ class AppbarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
     final size = MediaQuery.of(context).size;
     return SliverAppBar(
+      automaticallyImplyLeading: false,
       pinned: true,
-      backgroundColor: scheme.surface,
+      backgroundColor: ConstColors.materialCreamWhite,
       surfaceTintColor: Colors.transparent,
       toolbarHeight: size.height * 0.070,
       flexibleSpace: FlexibleSpaceBar(
@@ -29,7 +30,7 @@ class AppbarWidget extends StatelessWidget {
           ),
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           decoration: BoxDecoration(
-            color: scheme.onSecondary,
+            color: ConstColors.materialWhite,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Row(

@@ -1,4 +1,5 @@
 import 'package:apple_store/core/utils/category_model.dart';
+import 'package:apple_store/core/utils/const_colors.dart';
 import 'package:apple_store/core/utils/const_strings.dart';
 import 'package:apple_store/screens/widgets/appbar_widget.dart';
 import 'package:apple_store/screens/widgets/banner_item_widget.dart';
@@ -19,42 +20,36 @@ class HomeScreen extends StatelessWidget {
       viewportFraction: 0.85,
     );
     final size = MediaQuery.of(context).size;
-    final scheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
       child: CustomScrollView(
         slivers: [
-          _buildHomeScreenSearchWidget(textTheme, scheme, size),
+          _buildHomeScreenSearchWidget(textTheme),
           const SliverToBoxAdapter(child: SizedBox(height: 20)),
-          _buildHomeScreenBannerWidget(size, bannerController, scheme),
+          _buildHomeScreenBannerWidget(bannerController),
           const SliverToBoxAdapter(child: SizedBox(height: 30)),
+          _buildHomeScreenCategoryTitleWidget(size, textTheme),
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
           _buildHomeScreenCategoryListWidget(textTheme, size),
-          const SliverToBoxAdapter(child: SizedBox(height: 30)),
           const HelperLinkWidget(title: ConstStrings.homeScreenBestSellers),
-          const SliverToBoxAdapter(child: SizedBox(height: 20)),
           _buildHomeScreenProductListWidget(size),
-          const SliverToBoxAdapter(child: SizedBox(height: 30)),
           const HelperLinkWidget(title: ConstStrings.homeScreenMostVieweds),
-          const SliverToBoxAdapter(child: SizedBox(height: 20)),
           _buildHomeScreenProductListWidget(size),
-          const SliverToBoxAdapter(child: SizedBox(height: 30)),
           const HelperLinkWidget(title: ConstStrings.homeScreenMostVieweds),
-          const SliverToBoxAdapter(child: SizedBox(height: 20)),
           _buildHomeScreenProductListWidget(size),
-          const SliverToBoxAdapter(child: SizedBox(height: 30)),
+          const SliverToBoxAdapter(child: SizedBox(height: 100)),
         ],
       ),
     );
   }
 
-  Widget _buildHomeScreenSearchWidget(textTheme, scheme, size) {
+  Widget _buildHomeScreenSearchWidget(textTheme) {
     return AppbarWidget(
-      startWidget: Icon(
+      startWidget: const Icon(
         Iconsax.search_normal_1,
-        size: size.height * 0.028,
-        color: scheme.onSurface,
+        size: 25,
+        color: ConstColors.materialBlack,
       ),
       centerWidget: Expanded(
         child: TextField(
@@ -66,14 +61,18 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      endWidget: Icon(Icons.apple, color: scheme.secondary, size: 32),
+      endWidget: const Icon(
+        Icons.apple,
+        color: ConstColors.materialBlue,
+        size: 32,
+      ),
     );
   }
 
-  Widget _buildHomeScreenBannerWidget(size, bannerController, scheme) {
+  Widget _buildHomeScreenBannerWidget(bannerController) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: size.height * 0.195,
+        height: 170,
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
@@ -89,12 +88,12 @@ class HomeScreen extends StatelessWidget {
               child: SmoothPageIndicator(
                 controller: bannerController,
                 count: 3,
-                effect: ExpandingDotsEffect(
+                effect: const ExpandingDotsEffect(
                   dotHeight: 5.0,
                   dotWidth: 5.0,
                   expansionFactor: 4.0,
-                  dotColor: scheme.surface,
-                  activeDotColor: scheme.secondary,
+                  dotColor: ConstColors.materialWhite,
+                  activeDotColor: ConstColors.materialBlue,
                 ),
                 onDotClicked: (index) {
                   bannerController.animateToPage(
@@ -111,33 +110,31 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  SliverToBoxAdapter _buildHomeScreenCategoryTitleWidget(size, textTheme) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: EdgeInsets.only(right: size.width * 0.1),
+        child: Text(
+          style: textTheme.bodyMedium,
+          ConstStrings.homeScreenCategoryTitle,
+        ),
+      ),
+    );
+  }
+
   Widget _buildHomeScreenCategoryListWidget(textTheme, size) {
     return SliverToBoxAdapter(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(right: size.width * 0.1),
-            child: Text(
-              style: textTheme.bodyMedium,
-              ConstStrings.homeScreenCategoryTitle,
-            ),
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            height: size.height * 0.09,
-            width: double.infinity,
-            child: ListView.builder(
-              itemCount: CategoryModel.categories.length,
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.only(right: size.width * 0.1),
-              itemBuilder: (context, index) {
-                final CategoryModel category = CategoryModel.categories[index];
-                return CategoryItemWidget(category: category);
-              },
-            ),
-          ),
-        ],
+      child: SizedBox(
+        height: 82,
+        child: ListView.builder(
+          itemCount: CategoryModel.categories.length,
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.only(right: size.width * 0.1),
+          itemBuilder: (context, index) {
+            final CategoryModel category = CategoryModel.categories[index];
+            return CategoryItemWidget(category: category);
+          },
+        ),
       ),
     );
   }
@@ -145,7 +142,7 @@ class HomeScreen extends StatelessWidget {
   SliverToBoxAdapter _buildHomeScreenProductListWidget(size) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: size.height * 0.248,
+        height: 216,
         child: ListView.builder(
           itemCount: 10,
           scrollDirection: Axis.horizontal,
